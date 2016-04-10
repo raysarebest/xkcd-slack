@@ -1,6 +1,7 @@
 "use strict";
 let Botkit = require("botkit");
 let http = require("http");
+let API = require("./api.js");
 
 if(!process.env.XKCD_CLIENT_ID || !process.env.XKCD_CLIENT_SECRET || !process.env.XKCD_PORT || !process.env.XKCD_VERIFICATION_TOKEN){
     console.log('Error: Specify XKCD_CLIENT_ID, XKCD_CLIENT_SECRET, XKCD_VERIFICATION_TOKEN and XKCD_PORT in environment');
@@ -41,8 +42,15 @@ controller.on('slash_command', (slashCommand, message) => {
           slashCommand.replyPrivate(message, "I'll find you an xkcd comic for whatever situation you wanna give me");
           return;
         }
-        slashCommand.replyPublicDelayed(message, "", () => {
-          //TODO: Implement the actual functionality
+        slashCommand.replyPublic(message, "", () => {
+          API.get(message.text, (result, error) => {
+            if(error){
+              slashCommand.replyPublicDelayed(message, "Sorry, but something went wrong :cry:");
+            }
+            else{
+              slashCommand.replyPublicDelayed(message, {title: result.number, title_link: result.url, image_url: result.imageURL});
+            }
+          });
         });
       }
       break;
