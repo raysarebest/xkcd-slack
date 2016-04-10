@@ -49,7 +49,7 @@ controller.on('slash_command', (slashCommand, message) => {
             }
             else{
               let response = {title: result.number, title_link: result.url, image_url: result.imageURL};
-              console.log(`Responding with data: ${response}`);
+              console.log(`Responding with data: ${JSON.stringify(response)}`);
               slashCommand.replyPublicDelayed(message, response);
             }
           });
