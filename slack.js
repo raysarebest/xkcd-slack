@@ -3,9 +3,9 @@ let Botkit = require("botkit");
 let http = require("http");
 let API = require("./api.js");
 
-if(!process.env.XKCD_CLIENT_ID || !process.env.XKCD_CLIENT_SECRET || !process.env.XKCD_PORT || !process.env.XKCD_VERIFICATION_TOKEN){
-    console.log('Error: Specify XKCD_CLIENT_ID, XKCD_CLIENT_SECRET, XKCD_VERIFICATION_TOKEN and XKCD_PORT in environment');
-    process.exit(1);
+if(!process.env.XKCD_CLIENT_ID || !process.env.XKCD_CLIENT_SECRET || !process.env.PORT || !process.env.XKCD_VERIFICATION_TOKEN){
+    console.log('Error: Specify XKCD_CLIENT_ID, XKCD_CLIENT_SECRET and XKCD_VERIFICATION_TOKEN in environment');
+    //process.exit(1);
 }
 
 let config = {};
@@ -19,7 +19,7 @@ else{
 
 let controller = Botkit.slackbot(config).configureSlackApp({clientId: process.env.XKCD_CLIENT_ID, clientSecret: process.env.XKCD_CLIENT_SECRET, scopes: ['commands']});
 
-controller.setupWebserver(process.env.XKCD_PORT, (error, webserver) => {
+controller.setupWebserver(process.env.PORT, (error, webserver) => {
   controller.createWebhookEndpoints(controller.webserver);
   controller.createOauthEndpoints(controller.webserver, (error, req, res) => {
     if(error){
