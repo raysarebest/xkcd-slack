@@ -4,7 +4,8 @@
   "description": "There's an xkcd for every situation, and now you can find it from Slack",
   "main": "slack.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node slack.js"
   },
   "repository": {
     "type": "git",
