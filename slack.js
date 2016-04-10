@@ -5,7 +5,7 @@ let API = require("./api.js");
 
 if(!process.env.XKCD_CLIENT_ID || !process.env.XKCD_CLIENT_SECRET || !process.env.PORT || !process.env.XKCD_VERIFICATION_TOKEN){
     console.log('Error: Specify XKCD_CLIENT_ID, XKCD_CLIENT_SECRET and XKCD_VERIFICATION_TOKEN in environment');
-    //process.exit(1);
+    process.exit(1);
 }
 
 let config = {};
