@@ -1,4 +1,5 @@
-var http = require("http");
+let http = require("http");
+let XKCD = require("./xkcd.js");
 
 function getData(query, callback){
   http.get(`http://relevantxkcd.appspot.com/process?action=xkcd&query=${encodeURI(query)}`, (response) => {

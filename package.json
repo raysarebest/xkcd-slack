@@ -1,0 +1,26 @@
+{
+  "name": "xkcd-slack",
+  "version": "1.0.0",
+  "description": "There's an xkcd for every situation, and now you can find it from Slack",
+  "main": "slack.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raysarebest/xkcd-slack.git"
+  },
+  "keywords": [
+    "xkcd",
+    "slack"
+  ],
+  "author": "Michael Hulet",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/raysarebest/xkcd-slack/issues"
+  },
+  "homepage": "https://github.com/raysarebest/xkcd-slack#readme",
+  "dependencies": {
+    "botkit": "0.0.15"
+  }
+}
