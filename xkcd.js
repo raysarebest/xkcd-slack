@@ -1,3 +1,4 @@
+"use strict";
 module.exports = class XKCD {
   constructor(number, imageURL){
     this.number = number;
