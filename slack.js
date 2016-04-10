@@ -48,7 +48,9 @@ controller.on('slash_command', (slashCommand, message) => {
               slashCommand.replyPublicDelayed(message, "Sorry, but something went wrong :cry:");
             }
             else{
-              slashCommand.replyPublicDelayed(message, {title: result.number, title_link: result.url, image_url: result.imageURL});
+              let response = {title: result.number, title_link: result.url, image_url: result.imageURL};
+              console.log(`Responding with data: ${response}`);
+              slashCommand.replyPublicDelayed(message, response);
             }
           });
         });
