@@ -1,6 +1,5 @@
 "use strict";
 let Botkit = require("botkit");
-let BeepBoop = require("beepboop-botkit");
 let http = require("http");
 let API = require("./api.js");
 
@@ -19,7 +18,6 @@ else{
 }
 
 let controller = Botkit.slackbot(config).configureSlackApp({clientId: process.env.XKCD_CLIENT_ID, clientSecret: process.env.XKCD_CLIENT_SECRET, scopes: ['commands']});
-BeepBoop.start(controller);
 
 controller.setupWebserver(process.env.PORT, (error, webserver) => {
   controller.createWebhookEndpoints(controller.webserver);
