@@ -1,10 +1,11 @@
 "use strict";
 let Botkit = require("botkit");
+let BeepBoop = require("beepboop-botkit");
 let http = require("http");
 let API = require("./api.js");
 
-if(!process.env.XKCD_CLIENT_ID || !process.env.XKCD_CLIENT_SECRET || !process.env.PORT || !process.env.XKCD_VERIFICATION_TOKEN){
-    console.log('Error: Specify XKCD_CLIENT_ID, XKCD_CLIENT_SECRET and XKCD_VERIFICATION_TOKEN in environment');
+if(!process.env.XKCD_CLIENT_ID || !process.env.XKCD_CLIENT_SECRET || !process.env.PORT || !process.env.SLACK_VERIFY_TOKEN){
+    console.log('Error: Specify XKCD_CLIENT_ID, XKCD_CLIENT_SECRET and SLACK_VERIFY_TOKEN in environment');
     process.exit(1);
 }
 
@@ -18,6 +19,7 @@ else{
 }
 
 let controller = Botkit.slackbot(config).configureSlackApp({clientId: process.env.XKCD_CLIENT_ID, clientSecret: process.env.XKCD_CLIENT_SECRET, scopes: ['commands']});
+BeepBoop.start(controller);
 
 controller.setupWebserver(process.env.PORT, (error, webserver) => {
   controller.createWebhookEndpoints(controller.webserver);
@@ -34,7 +36,7 @@ controller.setupWebserver(process.env.PORT, (error, webserver) => {
 controller.on('slash_command', (slashCommand, message) => {
   switch(message.command){
     case "/xkcd":
-      if (message.token !== process.env.XKCD_VERIFICATION_TOKEN){
+      if (message.token !== process.env.SLACK_VERIFY_TOKEN){
         return;
       }
       else{
