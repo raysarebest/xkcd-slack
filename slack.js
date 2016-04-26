@@ -4,8 +4,8 @@ let BeepBoop = require("beepboop-botkit");
 let http = require("http");
 let API = require("./api.js");
 
-if(!process.env.XKCD_CLIENT_ID || !process.env.XKCD_CLIENT_SECRET || !process.env.PORT || !process.env.SLACK_VERIFY_TOKEN){
-    console.log('Error: Specify XKCD_CLIENT_ID, XKCD_CLIENT_SECRET and SLACK_VERIFY_TOKEN in environment');
+if(!process.env.PORT || !process.env.SLACK_VERIFY_TOKEN){
+    console.log('Error: Specify PORT and SLACK_VERIFY_TOKEN in environment');
     process.exit(1);
 }
 
@@ -18,7 +18,7 @@ else{
   config = {json_file_store: './db_slackbutton_slash_command/'};
 }
 
-let controller = Botkit.slackbot(config).configureSlackApp({clientId: process.env.XKCD_CLIENT_ID, clientSecret: process.env.XKCD_CLIENT_SECRET, scopes: ['commands']});
+let controller = Botkit.slackbot(config).configureSlackApp({scopes: ['commands']});
 BeepBoop.start(controller);
 
 controller.setupWebserver(process.env.PORT, (error, webserver) => {
