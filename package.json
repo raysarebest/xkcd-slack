@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/raysarebest/xkcd-slack#readme",
   "dependencies": {
-    "beepboop-botkit": "^1.1.2",
-    "botkit": "0.0.15"
+    "botkit": "0.0.15",
+    "cheerio": "^0.20.0"
   }
 }
