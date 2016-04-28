@@ -1,6 +1,5 @@
 "use strict";
 let Botkit = require("botkit");
-let BeepBoop = require("beepboop-botkit");
 let http = require("http");
 let API = require("./api.js");
 
@@ -9,17 +8,8 @@ if(!process.env.PORT || !process.env.SLACK_VERIFY_TOKEN){
     process.exit(1);
 }
 
-let config = {};
-if(process.env.MONGOLAB_URI){
-  let BotkitStorage = require('botkit-storage-mongo');
-  config = {storage: BotkitStorage({mongoUri: process.env.MONGOLAB_URI})};
-}
-else{
-  config = {json_file_store: './db_slackbutton_slash_command/'};
-}
-
-let controller = Botkit.slackbot(config);
-BeepBoop.start(controller);
+let controller = Botkit.slackbot();
+require("beepboop-botkit").start(controller);
 
 controller.setupWebserver(process.env.PORT, (error, webserver) => {
   controller.createWebhookEndpoints(controller.webserver);
