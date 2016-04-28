@@ -23,14 +23,6 @@ BeepBoop.start(controller);
 
 controller.setupWebserver(process.env.PORT, (error, webserver) => {
   controller.createWebhookEndpoints(controller.webserver);
-  controller.createOauthEndpoints(controller.webserver, (error, req, res) => {
-    if(error){
-      res.status(500).send('ERROR: ' + error);
-    }
-    else{
-      res.send('Success!');
-    }
-  });
 });
 
 controller.on('slash_command', (slashCommand, message) => {
