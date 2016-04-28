@@ -18,7 +18,7 @@ else{
   config = {json_file_store: './db_slackbutton_slash_command/'};
 }
 
-let controller = Botkit.slackbot(config).configureSlackApp({scopes: ['commands']});
+let controller = Botkit.slackbot(config);
 BeepBoop.start(controller);
 
 controller.setupWebserver(process.env.PORT, (error, webserver) => {
