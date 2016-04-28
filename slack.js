@@ -9,7 +9,7 @@ if(!process.env.PORT || !process.env.SLACK_VERIFY_TOKEN){
 }
 
 let controller = Botkit.slackbot();
-require("beepboop-botkit").start(controller);
+require("beepboop-botkit").start(controller, {debug: true});
 
 controller.setupWebserver(process.env.PORT, (error, webserver) => {
   controller.createWebhookEndpoints(controller.webserver);
