@@ -8,7 +8,7 @@ if(!process.env.PORT || !process.env.SLACK_VERIFY_TOKEN){
     process.exit(1);
 }
 
-let controller = botkit.slackbot();
+let controller = Botkit.slackbot();
 require('beepboop-botkit').start(controller, {debug: true});
 
 controller.setupWebserver(process.env.PORT, (error, webserver) => {
@@ -26,7 +26,7 @@ controller.on('slash_command', (slashCommand, message) => {
         return;
       }
       else{
-        if (message.text === "" || message.text === "help") {
+        if (message.text === "" || message.text.toLowerCase() === "help") {
           slashCommand.replyPrivate(message, "I'll find you an xkcd comic for whatever situation you wanna give me");
           return;
         }
