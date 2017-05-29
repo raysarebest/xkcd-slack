@@ -19,8 +19,9 @@ module.exports.get = (query, callback) => {
           xkcdString += data;
         });
         xkcdResponse.on("end", () => {
-          let xkcdDOM = cheerio.load(xkcdString);
+          const xkcdDOM = cheerio.load(xkcdString);
           response.caption = xkcdDOM("#comic > img")[0].attribs.title;
+          response.title = xkcdDOM("#ctitle").text();
           callback(response, null);
         });
         xkcdResponse.on("error", (error) => {
