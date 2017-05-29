@@ -1,7 +1,8 @@
 "use strict";
-let http = require("http");
-let cheerio = require("cheerio");
-let XKCD = require("./xkcd.js");
+const http = require("http");
+const https = require("https");
+const cheerio = require("cheerio");
+const xkcd = require("./xkcd.js");
 
 module.exports.get = (query, callback) => {
   http.get(`http://relevantxkcd.appspot.com/process?action=xkcd&query=${encodeURI(query)}`, (APIResponse) => {
@@ -10,23 +11,22 @@ module.exports.get = (query, callback) => {
       APIResponseString += data;
     });
     APIResponse.on("end", () => {
-      let result = APIResponseString.trim().split(" \n")[2].split(" ");
-      let xkcd = XKCD(result[0], result[1]);
-      http.get(xkcd.url, (xkcdResponse) => {
+      const result = APIResponseString.trim().split(" \n")[2].split(" ");
+      let response = new xkcd(result[0], result[1]);
+      https.get(response.url, (xkcdResponse) => {
         let xkcdString = "";
         xkcdResponse.on("data", (data) => {
           xkcdString += data;
         });
         xkcdResponse.on("end", () => {
           let xkcdDOM = cheerio.load(xkcdString);
-          xkcd.caption = xkcdDOM("#comic > img")[0].attribs.title;
-          callback(xkcd, null);
+          response.caption = xkcdDOM("#comic > img")[0].attribs.title;
+          callback(response, null);
         });
         xkcdResponse.on("error", (error) => {
           callback(null, error);
         })
       });
-      callback(xkcd, null);
     });
     APIResponse.on("error", (error) => {
       callback(null, error);

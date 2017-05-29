@@ -1,15 +1,14 @@
 "use strict";
-let Botkit = require("botkit");
-let http = require("http");
-let API = require("./api.js");
+const Botkit = require("botkit");
+const http = require("http");
+const API = require("./api.js");
 
-if(!process.env.PORT || !process.env.SLACK_VERIFY_TOKEN){
-    console.log('Error: Specify PORT and SLACK_VERIFY_TOKEN in environment');
+if(!process.env.PORT || !process.env.SLACK_VERIFY_TOKEN || !process.env.CLIENT_ID || !process.env.CLIENT_SECRET){
+    console.error("Error: Specify PORT, SLACK_VERIFY_TOKEN, process.env.CLIENT_ID, and process.env.CLIENT_SECRET in the environment");
     process.exit(1);
 }
 
-let controller = Botkit.slackbot();
-require('beepboop-botkit').start(controller, {debug: true});
+const controller = Botkit.slackbot({json_file_store: "PRODUCTION-DATA-DO-NOT-TOUCH"}).configureSlackApp({clientId: process.env.CLIENT_ID, clientSecret: process.env.CLIENT_SECRET, scopes: ["commands"]});
 
 controller.setupWebserver(process.env.PORT, (error, webserver) => {
   if(error){
@@ -17,9 +16,17 @@ controller.setupWebserver(process.env.PORT, (error, webserver) => {
     process.exit(1);
   }
   controller.createWebhookEndpoints(controller.webserver);
+  controller.createOauthEndpoints(controller.webserver, (error, request, response) => {
+        if(error){
+            response.status(500).send('ERROR: ' + err);
+        }
+        else{
+            response.send('Success! You can close this tab now.');
+        }
+    });
 });
 
-controller.on('slash_command', (slashCommand, message) => {
+controller.on("slash_command", (slashCommand, message) => {
   switch(message.command){
     case "/xkcd":
       if (message.token !== process.env.SLACK_VERIFY_TOKEN){

@@ -1,8 +1,8 @@
 "use strict";
-module.exports = class XKCD{
+module.exports = class xkcd{
   constructor(number, imageURL){
     this.number = number;
-    this.url = `http://xkcd.com/${number}`;
+    this.url = `https://xkcd.com/${number}/`;
     this.imageURL = `http://www.explainxkcd.com${imageURL}`
   }
 };
