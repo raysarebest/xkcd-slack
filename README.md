@@ -1,6 +1,6 @@
 # Relevant xkcd for Slack
 
-<a href='https://beepboophq.com/api/slack/auth/add-to-slack/fb3caf3dac1a4a50bff49d6503251dcf'><img alt='Add to Slack' height='40' width='139' src='https://platform.slack-edge.com/img/add_to_slack.png' srcset='https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x' /></a>
+<a href="https://slack.com/oauth/authorize?&client_id=14871708224.33439224246&scope=chat:write:bot,commands"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
 
 There's a relevant xkcd comic for everything, and now you can find it with a slash command in Slack
 
