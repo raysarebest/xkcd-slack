@@ -43,7 +43,7 @@ controller.on("slash_command", (slashCommand, message) => {
               slashCommand.replyPublicDelayed(message, "Sorry, but something went wrong :cry:");
             }
             else{
-              slashCommand.replyPublicDelayed(message, {attachments: [{fallback: `xkcd comic ${result.number}`, title: result.title, title_link: result.url, text: result.caption, image_url: result.imageURL}]});
+              slashCommand.replyPublicDelayed(message, {attachments: [{fallback: `xkcd comic ${result.number}: "${result.title}"`, title: result.title, title_link: result.url, text: result.caption, image_url: result.imageURL}]});
             }
           });
         });
